@@ -1,40 +1,51 @@
 package com.RadixLogos.eventmanegement.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_categoria")
-public class Categoria implements Serializable{
+@Table(name="tb_atividade")
+public class Atividade implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	private String name;
 	private String descricao;
+	private Double preco;
 	
-	@OneToMany(mappedBy = "categoria")
-	Set<Atividade> atividades = new HashSet<>();
-	
-	public Categoria() {
+	@ManyToOne
+	@JoinColumn(name = "categoria_id")
+	private Categoria categoria;
+	public Atividade() {
 		
 	}
-	
-	public Categoria(Integer id, String descricao) {
+
+	public Atividade(Integer id, String name, String descricao, Double preco) {
 		this.id = id;
+		this.name = name;
 		this.descricao = descricao;
+		this.preco = preco;
 	}
 
 	public Integer getId() {
 		return id;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescricao() {
@@ -45,9 +56,17 @@ public class Categoria implements Serializable{
 		this.descricao = descricao;
 	}
 
+	public Double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(Double preco) {
+		this.preco = preco;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		return Objects.hash(descricao, id, name, preco);
 	}
 
 	@Override
@@ -58,11 +77,12 @@ public class Categoria implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Categoria other = (Categoria) obj;
-		return Objects.equals(id, other.id);
+		Atividade other = (Atividade) obj;
+		return Objects.equals(descricao, other.descricao) && Objects.equals(id, other.id)
+				&& Objects.equals(name, other.name) && Objects.equals(preco, other.preco);
 	}
 
-	
+
 	
 	
 	
