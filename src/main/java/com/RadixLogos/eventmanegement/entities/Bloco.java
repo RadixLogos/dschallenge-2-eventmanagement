@@ -1,8 +1,9 @@
 package com.RadixLogos.eventmanegement.entities;
 
-import java.io.Serializable;
+import java.time.Instant;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,33 +11,44 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_categoria")
-public class Categoria implements Serializable{
-	private static final long serialVersionUID = 1L;
+@Table(name = "tb_bloco")
+public class Bloco {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String descricao;
+	@Column(columnDefinition= "TIMESTAMP WITHOUT TIME ZONE")
+	private Instant inicio;
+	@Column(columnDefinition= "TIMESTAMP WITHOUT TIME ZONE")
+	private Instant fim;
 	
-	public Categoria() {
+	public Bloco() {
 		
 	}
-	
-	public Categoria(Integer id, String descricao) {
+
+	public Bloco(Integer id, Instant inicio, Instant fim) {
 		this.id = id;
-		this.descricao = descricao;
+		this.inicio = inicio;
+		this.fim = fim;
 	}
 
 	public Integer getId() {
 		return id;
 	}
-
-	public String getDescricao() {
-		return descricao;
+	
+	public Instant getInicio() {
+		return inicio;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setInicio(Instant inicio) {
+		this.inicio = inicio;
+	}
+
+	public Instant getFim() {
+		return fim;
+	}
+
+	public void setFim(Instant fim) {
+		this.fim = fim;
 	}
 
 	@Override
@@ -52,11 +64,10 @@ public class Categoria implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Categoria other = (Categoria) obj;
+		Bloco other = (Bloco) obj;
 		return Objects.equals(id, other.id);
 	}
 
-	
 	
 	
 	
