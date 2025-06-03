@@ -1,6 +1,7 @@
 package com.RadixLogos.eventmanegement.entities;
 
 import java.io.Serializable;
+
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -23,7 +24,7 @@ public class Atividade implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String name;
+	private String nome;
 	private String descricao;
 	private Double preco;
 	
@@ -43,9 +44,9 @@ public class Atividade implements Serializable{
 		
 	}
 
-	public Atividade(Integer id, String name, String descricao, Double preco) {
+	public Atividade(Integer id, String nome, String descricao, Double preco) {
 		this.id = id;
-		this.name = name;
+		this.nome = nome;
 		this.descricao = descricao;
 		this.preco = preco;
 	}
@@ -54,12 +55,12 @@ public class Atividade implements Serializable{
 		return id;
 	}
 	
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getDescricao() {
@@ -99,7 +100,7 @@ public class Atividade implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(descricao, id, name, preco);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -111,12 +112,7 @@ public class Atividade implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Atividade other = (Atividade) obj;
-		return Objects.equals(descricao, other.descricao) && Objects.equals(id, other.id)
-				&& Objects.equals(name, other.name) && Objects.equals(preco, other.preco);
+		return Objects.equals(id, other.id);
 	}
 
-
-	
-	
-	
 }
