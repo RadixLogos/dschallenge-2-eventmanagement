@@ -1,14 +1,19 @@
 package com.RadixLogos.eventmanegement.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,6 +30,15 @@ public class Atividade implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
+	@ManyToMany
+	@JoinTable(name="tb_atividade_participante",
+				joinColumns = @JoinColumn(name = "atividade_id"),
+				inverseJoinColumns = @JoinColumn(name = "participante_id")
+			)
+	private Set<Participante> participantes = new HashSet<>();
+	@OneToMany(mappedBy = "atividade")
+	private Set<Bloco> blocos = new HashSet<>();
+	
 	public Atividade() {
 		
 	}
@@ -62,6 +76,25 @@ public class Atividade implements Serializable{
 
 	public void setPreco(Double preco) {
 		this.preco = preco;
+	}
+	
+	
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+	
+	
+	public Set<Participante> getParticipantes() {
+		return participantes;
+	}
+	
+	
+	public Set<Bloco> getBlocos() {
+		return blocos;
 	}
 
 	@Override
