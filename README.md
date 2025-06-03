@@ -10,3 +10,13 @@ cadastrar seu nome e email.
 
 ![image](https://github.com/user-attachments/assets/8d48621a-28a6-452b-8995-b4f56682f915)
 
+## Diagrama para Seeding dos dados
+
+![image](https://github.com/user-attachments/assets/4e55b6ee-1510-46be-9a71-dbb7fc289b04)
+
+**Para testar o projeto**
+* Clonar projeto em uma máquina com JVM
+* Rodar projeto e acessar http://localhost:8080/h2-console
+* Conectar ao banco H2 e fazer os testes
+  
+
